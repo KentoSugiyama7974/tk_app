@@ -1,16 +1,17 @@
 import tkinter as tk
 
 class GameFrameUI:
-    def __init__(self,master):
+    def __init__(self,master,N):
         self.master = master
         self.create_frame()
-        self.create_buttons()
+        self.create_buttons(N)
 
     def create_frame(self):
         self.frame = tk.Frame(
             self.master,
             width=300,
             height=300,
+            name="frame",
         )
         self.frame.pack()
 
@@ -21,9 +22,10 @@ class GameFrameUI:
                     self.frame,
                     width=10,
                     height=10,
-                    text=str(x)+" "+str(y),
+                    text="",
                     fg="SystemButtonFace",
-                    font=("",20)
+                    font=("",20),
+                    name=str(x)+" "+str(y)
                 )
                 buttons.grid(column=x, row=y)
         
