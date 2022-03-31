@@ -1,7 +1,7 @@
 import tkinter as tk
 
 class GameFrameUI:
-    def __init__(self,master,N):
+    def __init__(self,master,N=3):
         self.master = master
         self.create_frame()
         self.create_buttons(N)
@@ -15,21 +15,21 @@ class GameFrameUI:
         )
         self.frame.pack()
 
-    def create_buttons(self,N=3):
+    def create_buttons(self,N):
         for y in range(N):
             for x in range(N):
                 buttons = tk.Button(
                     self.frame,
                     width=10,
                     height=10,
+                    bg="#EEE",
                     text="",
-                    fg="SystemButtonFace",
-                    font=("",20),
+                    font=("",8),
                     name=str(x)+" "+str(y)
                 )
                 buttons.grid(column=x, row=y)
         
 if __name__ == "__main__":
     master = tk.Tk()
-    GameFrameUI(master)
+    GameFrameUI(master,3)
     master.mainloop()

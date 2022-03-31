@@ -1,3 +1,4 @@
+from turtle import bgcolor
 from ui.game_frame_ui import GameFrameUI
 
 import tkinter as tk
@@ -11,6 +12,7 @@ class GameFrameProcess:
         self.ui.frame.bind_all("<1>", self.push_buttons)
         self.set_bomb(size,bomb_num)
         self.coordinate = set()
+        self.no_bomb_num = size*size-bomb_num
 
     def set_bomb(self,size,bomb_num):
         self.bomb = [[0 for i in range(size)] for j in range(size)]
@@ -31,7 +33,7 @@ class GameFrameProcess:
 
     def change_text(self,x,y,a):
         button = self.master.nametowidget("frame."+str(x)+" "+str(y))
-        button.config(state="disable", text=str(a))
+        button.config(state="disable", text=str(a), bg="#DDD")
     
     def bomb_check(self,x,y):
         if 1 == self.bomb[y][x]:
@@ -45,6 +47,10 @@ class GameFrameProcess:
                 for _x,_y in coordinate:
                     self.bomb_check(_x,_y)
                 self.coordinate = self.coordinate | coordinate
+
+            if len(self.coordinate) == self.no_bomb_num:
+                messagebox.showinfo('GG!','あなたの勝ちです')
+                self.master.destroy()
             
 
     def around_check(self,x,y):
